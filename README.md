@@ -1,4 +1,4 @@
-# 4-way_set-associative_cache
+# 4-way Set-Associative Cache
 
 A simple project where is implemented a 4-way set-associative cache.
 
