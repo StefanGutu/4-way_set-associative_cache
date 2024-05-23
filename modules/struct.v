@@ -142,11 +142,11 @@ always @(posedge clk,posedge rst) begin
         end
         WRITE_HIT : begin
             c2 <= 1'b1;
+            c3 <= 1'b1;
         end
         READ_MISS : begin
             c1 <= 1'b1;
             c4 <= 1'b1;
-            
         end
         WRITE_MISS : begin
             c2 <= 1'b1;
@@ -182,7 +182,8 @@ module struct(
     output [511:0] outbus,
     output reg t0,t1,t2,t3,t4,t5,t6,t7,
     output reg hit_bar,
-    output reg [3:0] and_val
+    output reg [3:0] and_val,
+    output reg [3:0] dirty_bit_data
 );
 
 
@@ -192,6 +193,7 @@ module struct(
     wire temp_space;
     wire temp_ask;
     wire [3:0] temp_and;
+    wire [3:0] temp_dirty_bit;
 
     wire c0,c1,c2,c3,c4,c5,c6,c7;
 
@@ -201,7 +203,7 @@ module struct(
 
     cache cache_i(  .clk(clk),.rst(rst),.data(data),.address(address),
                     .c0(c0),.c1(c1),.c2(c2),.c3(c3),.c4(c4),.c5(c5),.c6(c6),.c7(c7),
-                    .hit_or_miss(temp_hit),.ask_for_data(temp_ask),.space_in_lru(temp_space),.outbus(outbus),.and_val(temp_and));
+                    .hit_or_miss(temp_hit),.ask_for_data(temp_ask),.space_in_lru(temp_space),.outbus(outbus),.and_val(temp_and),.dirty_bit(temp_dirty_bit));
 
     always @(*) begin
         hit = temp_hit;
@@ -216,6 +218,7 @@ module struct(
         t7 = c7;
         hit_bar = temp_hit;
         and_val = temp_and;
+        dirty_bit_data = temp_dirty_bit;
     end
 
 endmodule
