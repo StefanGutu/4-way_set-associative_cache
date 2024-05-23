@@ -11,6 +11,7 @@ wire [511:0] outbus;
 wire t0,t1,t2,t3,t4,t5,t6,t7;
 wire hit_bar;
 wire [3:0] and_val;
+wire [3:0] dirty_bit_data;
 
 
 struct uut (
@@ -22,7 +23,8 @@ struct uut (
     .data(data),
     .address(address),
     .outbus(outbus),
-    .t0(t0),.t1(t1),.t2(t2),.t3(t3),.t4(t4),.t5(t5),.t6(t6),.t7(t7),.hit_bar(hit_bar),.and_val(and_val)
+    .t0(t0),.t1(t1),.t2(t2),.t3(t3),.t4(t4),.t5(t5),.t6(t6),.t7(t7),
+    .hit_bar(hit_bar),.and_val(and_val),.dirty_bit_data(dirty_bit_data)
 );
 
 
@@ -125,6 +127,20 @@ initial begin
     // write = 0;
     // #200;
 
+    // address = 32'hEFFFEF0A;
+
+    // //WRITE
+    // #40;
+    // bgn = 1;
+    // #40;
+    // bgn = 0;
+    // #40;
+    // write = 1;
+    // #20;
+    // write = 0;
+    // #200;
+
+
     // //READ
     // #40;
     // bgn = 1;
@@ -166,27 +182,133 @@ initial begin
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------
 
-    //CASE 2
+    // //CASE 2
 
-    address = 32'hEFAFEF0A;
-    data = 512'hf1B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
+    // address = 32'hEFAFEF0A;
+    // data = 512'hf1B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
 
     
-    //WRITE
-    #40;
-    bgn = 1;
-    #40;
-    bgn = 0;
-    #40;
-    write = 1;
-    #20;
-    write = 0;
-    #200;
+    // //WRITE
+    // #40;
+    // bgn = 1;
+    // #40;
+    // bgn = 0;
+    // #40;
+    // write = 1;
+    // #20;
+    // write = 0;
+    // #200;
+
+    // address = 32'hCFAFEF0A;
+    // data = 512'hA1B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
+
+    
+    // //WRITE
+    // #40;
+    // bgn = 1;
+    // #40;
+    // bgn = 0;
+    // #40;
+    // write = 1;
+    // #20;
+    // write = 0;
+    // #200;
+
+    // address = 32'hAFAFEF0A;
+    // data = 512'h91B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
+
+    
+    // //WRITE
+    // #40;
+    // bgn = 1;
+    // #40;
+    // bgn = 0;
+    // #40;
+    // write = 1;
+    // #20;
+    // write = 0;
+    // #200;
+
+    // address = 32'hBFAFEF0A;
+    // data = 512'h81B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
+
+    
+    // //WRITE
+    // #40;
+    // bgn = 1;
+    // #40;
+    // bgn = 0;
+    // #40;
+    // write = 1;
+    // #20;
+    // write = 0;
+    // #200;
+
+
+    // address = 32'hEFAFEF0A;
+
+    // //READ
+    // #40;
+    // bgn = 1;
+    // #40;
+    // read = 1;
+    // #40;
+    // bgn = 0;
+    // #20;
+    // read = 0;
+    // #200;
+
+
+    // address = 32'hAFAFEF0A;
+
+    // //READ
+    // #40;
+    // bgn = 1;
+    // #40;
+    // read = 1;
+    // #40;
+    // bgn = 0;
+    // #20;
+    // read = 0;
+    // #200;
+
+
+    // address = 32'hBFAFEF0A;
+
+    // //READ
+    // #40;
+    // bgn = 1;
+    // #40;
+    // read = 1;
+    // #40;
+    // bgn = 0;
+    // #20;
+    // read = 0;
+    // #200;
+
+    // address = 32'hCFAFEF0A;
+
+    // //READ
+    // #40;
+    // bgn = 1;
+    // #40;
+    // read = 1;
+    // #40;
+    // bgn = 0;
+    // #20;
+    // read = 0;
+    // #200;
+
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    //CASE 3
+
 
     address = 32'hCFAFEF0A;
     data = 512'hA1B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
 
-    
     //WRITE
     #40;
     bgn = 1;
@@ -198,10 +320,7 @@ initial begin
     write = 0;
     #200;
 
-    address = 32'hAFAFEF0A;
-    data = 512'h91B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
 
-    
     //WRITE
     #40;
     bgn = 1;
@@ -212,11 +331,11 @@ initial begin
     #20;
     write = 0;
     #200;
+
 
     address = 32'hBFAFEF0A;
     data = 512'h81B2C3D4E5F60789_9876543210FEDCBA_BBCCDDEEFF001122_33445566778899AA_1122334455667788_99AABBCCDDEEFF00_0011223344556677_8899AABBCCDDEEFF;
 
-    
     //WRITE
     #40;
     bgn = 1;
@@ -228,46 +347,15 @@ initial begin
     write = 0;
     #200;
 
-
-    address = 32'hEFAFEF0A;
-
-    //READ
+    //WRITE
     #40;
     bgn = 1;
     #40;
-    read = 1;
-    #40;
     bgn = 0;
+    #40;
+    write = 1;
     #20;
-    read = 0;
-    #200;
-
-
-    address = 32'hAFAFEF0A;
-
-    //READ
-    #40;
-    bgn = 1;
-    #40;
-    read = 1;
-    #40;
-    bgn = 0;
-    #20;
-    read = 0;
-    #200;
-
-
-    address = 32'hBFAFEF0A;
-
-    //READ
-    #40;
-    bgn = 1;
-    #40;
-    read = 1;
-    #40;
-    bgn = 0;
-    #20;
-    read = 0;
+    write = 0;
     #200;
 
     address = 32'hCFAFEF0A;
@@ -283,6 +371,42 @@ initial begin
     read = 0;
     #200;
 
+
+    address = 32'hCAAFEF0A;
+    data = 512'hFEDCBA9876543210_0123456789ABCDEF_FEDCBA9876543210_0123456789ABCDEF_FEDCBA9876543210_0123456789ABCDEF_FEDCBA9876543210_0123456789ABCDEF;
+
+    //WRITE
+    #40;
+    bgn = 1;
+    #40;
+    bgn = 0;
+    #40;
+    write = 1;
+    #20;
+    write = 0;
+    #200;
+
+    //READ
+    #40;
+    bgn = 1;
+    #40;
+    read = 1;
+    #40;
+    bgn = 0;
+    #20;
+    read = 0;
+    #200;
+
+    //READ
+    #40;
+    bgn = 1;
+    #40;
+    read = 1;
+    #40;
+    bgn = 0;
+    #20;
+    read = 0;
+    #200;
 
 
 end
